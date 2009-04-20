@@ -1,32 +1,47 @@
 lesstrack
-    by FIXME (your name)
-    FIXME (url)
+    by Rob Kaufman
+    notch8.com
 
 == DESCRIPTION:
 
-FIXME (describe your package)
+lesstrack is simpler clone of freshtrack.  Basically it allows you to
+upload your punch record to LessTimeSpent.com
 
 == FEATURES/PROBLEMS:
 
-* FIXME (list of features or problems)
+* Currently uploads the whole punch.yml file no matter what
+* Should take command line arguments in the future
+* Should map project names instead of their ids
 
 == SYNOPSIS:
 
-  FIXME (code sample of usage)
+=== Config File
+  You need a to create a yaml file called .lesstrack.yml like so:
+
+   username: <username for lesstimespent>
+   password: <password for lesstimespent>
+   project_mapping:
+     <punch project name>:  <lesstimespent id number>
+     <punch project name>:  <lesstimespent id number>
+     ...
+
+=== Running
+
+   lesstrack
 
 == REQUIREMENTS:
 
-* FIXME (list of requirements)
+* restclient
 
 == INSTALL:
 
-* FIXME (sudo gem install, anything else)
+* sudo gem install notch8-lesstrack
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2008 FIXME (different license?)
+Copyright (c) 2009
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

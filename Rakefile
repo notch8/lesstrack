@@ -19,9 +19,9 @@ require 'lesstrack'
 task :default => 'spec:run'
 
 PROJ.name = 'lesstrack'
-PROJ.authors = 'FIXME (who is writing this software)'
-PROJ.email = 'FIXME (your e-mail)'
-PROJ.url = 'FIXME (project homepage)'
+PROJ.authors = 'Rob Kaufman'
+PROJ.email = 'rob@notch8.com'
+PROJ.url = 'github.com/notch8'
 PROJ.version = Lesstrack::VERSION
 PROJ.rubyforge.name = 'lesstrack'
 
