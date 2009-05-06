@@ -1,6 +1,7 @@
-
-require File.expand_path(
-    File.join(File.dirname(__FILE__), %w[.. lib lesstrack]))
+root = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+Dir.glob(File.join(root, "*.rb")) do |file|
+  require file
+end
 
 Spec::Runner.configure do |config|
   # == Mock Framework

@@ -27,7 +27,10 @@ class Lesstrack
 
   def run
     config['project_mapping'].each do |key, project_id|
+      clock_punches = ClockPunch.find(:all, :params => {:project_id => project_id})
       punch[key].each do |punch_item|
+        next if repeat?(punch_item, clock_punches)
+        check_repeat(punch_item, clock_punches)
         notes = punch_item["log"].clone
         notes.delete_if do |value| value.match(/^punch (in|out)/) end
         r = RestClient.post("https://#{config['username']}:#{config['password']}@lesstimespent.com/projects/#{project_id}/clock_punches.xml",
@@ -35,6 +38,12 @@ class Lesstrack
                               :ends_at => punch_item["out"],
                               :note => notes.join('\n')} )
       end
+    end
+  end
+
+  def repeat?(punch_item, clock_punches)
+    clock_punches.detect do |clock_punch|
+      punch_item["out"] == clock_punch.ends_at && punch_item["in"] == clock_punch.starts_at
     end
   end
   

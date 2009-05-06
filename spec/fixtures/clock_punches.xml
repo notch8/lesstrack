@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clock-punches type="array">
+  <clock-punch>
+    <created-at type="datetime">2009-05-06T11:53:17-07:00</created-at>
+    <ends-at type="datetime">2009-05-06T11:53:00-07:00</ends-at>
+    <id type="integer">13787</id>
+    <membership-id type="integer">1959</membership-id>
+    <note/>
+    <project-id type="integer">2001</project-id>
+    <starts-at type="datetime">2009-05-06T09:00:00-07:00</starts-at>
+    <time type="integer">10380</time>
+    <updated-at type="datetime">2009-05-06T11:53:17-07:00</updated-at>
+  </clock-punch>
+</clock-punches>
