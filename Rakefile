@@ -1,30 +1,47 @@
-# Look in the tasks/setup.rb file for the various options that can be
-# configured in this Rakefile. The .rake files in the tasks directory
-# are where the options are used.
+require 'rubygems'
+require 'rake'
 
 begin
-  require 'bones'
-  Bones.setup
-rescue LoadError
-  begin
-    load 'tasks/setup.rb'
-  rescue LoadError
-    raise RuntimeError, '### please install the "bones" gem ###'
+  require 'jeweler'
+  Jeweler::Tasks.new do |gem|
+    gem.name = "lesstrack"
+    gem.summary = %Q{upload punch to LessTimeSpent}
+    gem.description = %Q{this gem provides a link between the yaml based punch format and the lesstimespent.com}
+    gem.email = "rob@notch8.com"
+    gem.homepage = "http://github.com/notch8/lesstrack"
+    gem.authors = ["Rob Kaufman"]
+    gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.add_dependency "activeresource"
+    gem.add_dependency "rest-client"
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
-ensure_in_path 'lib'
-require 'lesstrack'
+require 'spec/rake/spectask'
+Spec::Rake::SpecTask.new(:spec) do |spec|
+  spec.libs << 'lib' << 'spec'
+  spec.spec_files = FileList['spec/**/*_spec.rb']
+end
 
-task :default => 'spec:run'
+Spec::Rake::SpecTask.new(:rcov) do |spec|
+  spec.libs << 'lib' << 'spec'
+  spec.pattern = 'spec/**/*_spec.rb'
+  spec.rcov = true
+end
 
-PROJ.name = 'lesstrack'
-PROJ.authors = 'Rob Kaufman'
-PROJ.email = 'rob@notch8.com'
-PROJ.url = 'github.com/notch8'
-PROJ.version = Lesstrack::VERSION
-PROJ.rubyforge.name = 'lesstrack'
+task :spec => :check_dependencies
 
-PROJ.spec.opts << '--color'
+task :default => :spec
 
-# EOF
+require 'rake/rdoctask'
+Rake::RDocTask.new do |rdoc|
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "lesstrack #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end

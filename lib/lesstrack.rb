@@ -1,11 +1,20 @@
 require 'rubygems'
 require 'yaml'
 require 'restclient'
-class Lesstrack
 
+class Lesstrack
+  
   def initialize
     @punch = nil
     @config = nil
+  end
+  
+  def self.username
+    @@username ||= nil
+  end
+  
+  def self.password
+    @@password ||= nil
   end
   
   # load the punch.yml file
@@ -19,10 +28,12 @@ class Lesstrack
 
   def config(reload = false)
     if reload || @config.nil?
-      return @config = YAML.load_file(File.join(ENV['HOME'], '.lesstrack.yml'))
-    else
-      return @config
+      @config = YAML.load_file(File.join(ENV['HOME'], '.lesstrack.yml'))
+      @@username = config['username']
+      @@password = config['password']
     end
+
+    return @config
   end
 
   def run

@@ -35,7 +35,7 @@ upload your punch record to LessTimeSpent.com
 
 == INSTALL:
 
-* sudo gem install notch8-lesstrack
+* sudo gem install lesstrack
 
 == LICENSE:
 
